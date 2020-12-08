@@ -9,7 +9,27 @@
                     </div>
                     <div class="z-depth-3">
                         <!-- VIDEO from URL -->
-                        <iframe style="width: 100%; height: 50vh;" v-bind:src="[videoURL]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe>
+                        <!-- <iframe style="width: 100%; height: 50vh;" v-bind:src="[videoURL]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe> -->
+                        <video-player  
+                            class="video-player-box"
+                            ref="videoPlayer"
+                            :options="playerOptions"
+                            :playsinline="true"
+                            customEventName="customstatechangedeventname"
+
+                            @play="onPlayerPlay($event)"
+                            @pause="onPlayerPause($event)"
+                            @ended="onPlayerEnded($event)"
+                            @waiting="onPlayerWaiting($event)"
+                            @playing="onPlayerPlaying($event)"
+                            @loadeddata="onPlayerLoadeddata($event)"
+                            @timeupdate="onPlayerTimeupdate($event)"
+                            @canplay="onPlayerCanplay($event)"
+                            @canplaythrough="onPlayerCanplaythrough($event)"
+
+                            @statechanged="playerStateChanged($event)"
+                            @ready="playerReadied">
+                        </video-player>
                     </div>
                     <div class="greetingsSec z-depth-3">
                         <!-- 賀詞/祝福語 -->
@@ -22,14 +42,81 @@
 </template>
 
 <script>
+import 'video.js/dist/video-js.css'
+import { videoPlayer} from 'vue-video-player'
+
 export default{
     name: 'GiftCard',
+    components:{
+        videoPlayer,
+    },
     data(){
         return{
-            gifter: "花蓮縣長 X縣長",
+            gifter: "花蓮縣 徐縣長",
             greetings: "這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,",
-            videoURL: "https://www.youtube.com/embed/LW7AUyUsHUo",
+            // videoURL: "https://www.youtube.com/embed/LW7AUyUsHUo",
+            playerOptions: {
+                // videojs options
+                muted: false,
+                language: 'en',
+                playbackRates: [0.5, 0.7, 1.0, 1.5, 2.0],
+                sources: 
+                [{
+                    type: "video/mp4",
+                    src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
+                }],
+                poster: "/static/images/author.jpg",
+            }
         }
+    },
+    mounted() {
+        console.log('this is current player instance object', this.player)
+    },
+    computed: {
+        player() {
+            return this.$refs.videoPlayer.player
+        }
+    },
+    methods: {
+        // listen event
+        onPlayerPlay(player) {
+          console.log('player play!', player)
+        },
+        onPlayerPause(player) {
+          console.log('player pause!', player)
+        },
+        // ...player event
+
+        // or listen state event
+        playerStateChanged(playerCurrentState) {
+          console.log('player current update state', playerCurrentState)
+        },
+
+        // player is ready
+        playerReadied(player) {
+          console.log('the player is readied', player)
+          // you can use it to do something...
+          // player.[methods]
+        },
+        onPlayerLoadeddata(data){
+            console.log('onPlayerLoadeddata',data)
+        },
+        onPlayerCanplay(data){
+            console.log('onPlayerCanplay',data)
+        },
+        onPlayerCanplaythrough(data){
+            console.log('onPlayerCanplaythrough',data)
+        },
+        onPlayerTimeupdate(){
+            // console.log('onPlayerTimeupdate', data)
+        },
+        onPlayerPlaying(data){
+            console.log('onPlayerPlaying', data)
+        },
+        onPlayerWaiting(data){
+            console.log('onPlayerWaiting', data)
+        }
+
     },
 }
 </script>

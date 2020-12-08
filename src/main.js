@@ -7,6 +7,9 @@ import App from './App.vue'
 // // Optionally install the BootstrapVue icon components plugin
 // Vue.use(IconsPlugin)
 
+import VueVideoPlayer from 'vue-video-player'
+
+Vue.use(VueVideoPlayer)
 Vue.config.productionTip = false
 
 new Vue({
