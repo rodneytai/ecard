@@ -15,20 +15,7 @@
                             ref="videoPlayer"
                             :options="playerOptions"
                             :playsinline="true"
-                            customEventName="customstatechangedeventname"
-
-                            @play="onPlayerPlay($event)"
-                            @pause="onPlayerPause($event)"
-                            @ended="onPlayerEnded($event)"
-                            @waiting="onPlayerWaiting($event)"
-                            @playing="onPlayerPlaying($event)"
-                            @loadeddata="onPlayerLoadeddata($event)"
-                            @timeupdate="onPlayerTimeupdate($event)"
-                            @canplay="onPlayerCanplay($event)"
-                            @canplaythrough="onPlayerCanplaythrough($event)"
-
-                            @statechanged="playerStateChanged($event)"
-                            @ready="playerReadied">
+                            customEventName="customstatechangedeventname">
                         </video-player>
                     </div>
                     <div class="greetingsSec z-depth-3">
@@ -54,7 +41,7 @@ export default{
         return{
             gifter: "花蓮縣 徐縣長",
             greetings: "這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,這是賀詞,",
-            // videoURL: "https://www.youtube.com/embed/LW7AUyUsHUo",
+            videoURL: "https://www.youtube.com/embed/LW7AUyUsHUo",
             playerOptions: {
                 // videojs options
                 muted: false,
